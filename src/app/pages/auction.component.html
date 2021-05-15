@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-md-12">
+    <h2>Products</h2>
+
+    <div *ngFor="let product of products">
+    
+      <h3>
+          <li>{{ product.name }}</li>
+          <li>{{ product.price }}</li>
+      </h3>
+    <button (click)="clickEvent()">Make a bid</button>
+    <textarea>enter the bidding price</textarea>
+    </div>
+
+</div>
+</div>
