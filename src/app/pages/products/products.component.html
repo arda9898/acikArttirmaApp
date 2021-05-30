@@ -3,44 +3,61 @@
   <div class="card col" style="width: 18rem;" *ngFor="let item of items | async">
     <div class="card-body">
     <h5 class="card-title">{{ item.productName }}</h5>
+    <p class="card-text"> Id : {{ item.id }}</p>
+    <p class="card-text"> customId : {{ item.customIdName }}</p>
     <p class="card-text"> Price : {{ item.price }}</p>
-    <p> {{item.startDate}} - {{item.endDate}}</p>
-    <textarea>amount you want to bid</textarea>
-    <a class="btn btn-primary" (click)="clickEvent()">Buy Now</a>
+    <p class="card-text"> Bid : {{ item.bid_amount }}</p>
+    <p class="card-text"> Bider Email : {{ item.bider_email}}</p>
+    <p> {{item.endDate}}</p>
+    <div>
+      <form (ngSubmit)="clickEvent(item)">
+          <div >
+              <div class="input-field col s6">
+                <input type="text" placeholder="Enter your e-mail" [(ngModel)]="item.bider_email" name="bider_email">
+              </div>
+              <div class="input-field col s6">
+                <input type="text" placeholder="Make a Bid" [(ngModel)]="item.bid_amount" name="bid_amount">
+              </div>
+            </div>
+            <div *ngIf="item.bid_amount" class="row">
+              <a class="btn btn-primary" (click)="clickEvent(item)">Buy Now</a>
+            </div>
+
+      </form>
+    </div>
   </div>  
 </div>
-    <div class="card col" style="width: 18rem;">
-      <img class="card-img-top" src="https://images-na.ssl-images-amazon.com/images/I/61PGMP8d5PL._SX425_.jpg" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">Dell Inspiron N15R</h5>
-        <p class="card-text"> Price : 40000</p>
-        <a href="#" class="btn btn-primary">Buy Now</a>
-      </div>
-    </div>
-    <div class="card col" style="width: 18rem;">
-      <img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8Ly4FD_xmz5Lva-tk6VRabgeKBZkRv8NoJ4ooJ1EwGSCcYFATwg" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">HP Elitebook E840</h5>
-        <p class="card-text"> Price : 42000</p>
-        <a href="#" class="btn btn-primary">Buy Now</a>
-      </div>
       
-    </div>
-  <div class="card col" style="width: 18rem;">
-        <img class="card-img-top" src="https://images-na.ssl-images-amazon.com/images/I/61PGMP8d5PL._SX425_.jpg" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Dell Inspiron N15R</h5>
-          <p class="card-text"> Price : 52000</p>
-          <a href="#" class="btn btn-primary">Buy Now</a>
-        </div>
-      </div>
-  </div>
-  <router-outlet></router-outlet>
-  <ul>
-   <li *ngFor="let item of items | async">
-     <h1>{{ item.productName }}</h1>
-     {{ item.price }}
-     {{item.startDate}} - {{item.endDate}}
+</div>
+      <script>
+      // Set the date we're counting down to
+      var countDownDate = new Date("Jan 5, 2022 15:37:25").getTime();
 
-   </li>
-  </ul>
+      // Update the count down every 1 second
+      var x = setInterval(function() {
+
+        // Get today's date and time
+        var now = new Date().getTime();
+
+        // Find the distance between now and the count down date
+        var distance = countDownDate - now;
+
+        // Time calculations for days, hours, minutes and seconds
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Display the result in the element with id="demo"
+        document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+        + minutes + "m " + seconds + "s ";
+
+        // If the count down is finished, write some text
+        if (distance < 0) {
+          clearInterval(x);
+          document.getElementById("demo").innerHTML = "EXPIRED";
+        }
+      }, 1000);
+      </script>
+      
+  <router-outlet></router-outlet>

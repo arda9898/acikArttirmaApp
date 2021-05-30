@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { ProductServiceService } from './product-service.service';
+import { Product } from './product.model';
+import { FormGroup, FormControl } from '@angular/forms';
+
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -8,23 +11,37 @@ import { Observable } from 'rxjs';
 })
 export class ProductsComponent implements OnInit {
 items: Observable<any[]>;
-  
-  constructor(db: AngularFirestore) {
-    this.items = db.collection('items').valueChanges();
+public product?: Product;
+bidForm: FormGroup;
+
+
+  constructor(public productService:ProductServiceService) {    
   }
 ngOnInit() {
+  this.items = this.productService.getAllDocs();
+
+  this.bidForm = new FormGroup({
+
+    'bider_email': new FormControl(null),
+    'bid_amount': new FormControl(null),
+  });
+
   }
 
-  clickEvent(){
-    console.log("you made a bid");
-    alert("you made a bid!");
-    
+  
+
+  clickEvent(product){
+    this.productService.updateItem(product);
 
   }
 
   // TODO: starting price olacak 
   // bid yaptım price artıcak
   // countdown bitince bid i yapan customer a bildirim gidicek
+  // time 0 olursa işlem alma
   //nice to have: buy now masaya vuran alır
 
 }
+
+
+
