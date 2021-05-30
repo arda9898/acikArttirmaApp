@@ -3,7 +3,6 @@
   <div class="card col" style="width: 18rem;" *ngFor="let item of items | async">
     <div class="card-body">
     <h5 class="card-title">{{ item.productName }}</h5>
-    <p class="card-text"> Id : {{ item.id }}</p>
     <p class="card-text"> customId : {{ item.customIdName }}</p>
     <p class="card-text"> Price : {{ item.price }}</p>
     <p class="card-text"> Bid : {{ item.bid_amount }}</p>
@@ -19,7 +18,7 @@
                 <input type="text" placeholder="Make a Bid" [(ngModel)]="item.bid_amount" name="bid_amount">
               </div>
             </div>
-            <div *ngIf="item.bid_amount" class="row">
+            <div class="row">
               <a class="btn btn-primary" (click)="clickEvent(item)">Buy Now</a>
             </div>
 

@@ -13,7 +13,9 @@ export class ProductServiceService {
   productRef: AngularFirestoreDocument<any>;
   bidsRef: Observable<any[]>;
   itemsArray=[];
-  bid_amount_prev:any;
+  bid_amount_prev:number;
+  prod: any;
+
 
   constructor(private db: AngularFirestore) {}
 /*
@@ -38,12 +40,23 @@ price?: number;
 }
 updateItem(product: Product){
   this.productRef = this.db.doc(`items/${product.customIdName}`);
-  this.bid_amount_prev = this.productRef.get(bid_amount:$bid_amount);
+  this.productRef.valueChanges().subscribe(prod => {
+    this.prod = prod;
+    this.bid_amount_prev = this.prod.bid_amount;
+  });
+
+  console.log("bid amount:",product.bid_amount);
+  console.log( "bid amount prev:" ,this.bid_amount_prev);
+ 
   if(product.bid_amount > this.bid_amount_prev){
     this.productRef.update(product);
+    console.log("success")
   }
 }
 
+  //console.log("product:",product.customIdName)
+  //console.log("product:",this.productRef)
+  
   // GetIdList() {
   //   this.productsRef = this.db.collection("items").snapshotChanges().subscribe((data) => {
   //     this.itemsArray = data.map(e => {
@@ -108,11 +121,3 @@ updateItem(product: Product){
   //     });
   // }
 }
-function getDocs(arg0: any) {
-  throw new Error('Function not implemented.');
-}
-
-function collection(db: any, arg1: string): any {
-  throw new Error('Function not implemented.');
-}
-

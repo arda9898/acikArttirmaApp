@@ -28,8 +28,6 @@ ngOnInit() {
 
   }
 
-  
-
   clickEvent(product){
     this.productService.updateItem(product);
 
