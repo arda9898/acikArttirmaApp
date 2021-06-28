@@ -11,7 +11,10 @@ export class TimeDiffPipe implements PipeTransform {
       const dateNow = new Date();
       const diffTime = Math.abs((dateNow as any) - (value as any));
       const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-      return value < dateNow ? `${diffDays} days passed` : ` last  ${diffDays} days`;
+      const diffHours = Math.ceil(diffTime / (1000 * 60 * 60 )) % 24;
+      const diffMins = Math.ceil(diffTime / (1000 * 60)) % 60;
+      return value < dateNow ? `${diffDays} days ${diffHours} hours ${diffMins} minutes passed` :
+       ` last  ${diffDays} days ${diffHours} hours ${diffMins} minutes`;
 
     }
     else return null;

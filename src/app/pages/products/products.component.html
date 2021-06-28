@@ -8,9 +8,7 @@
       <p class="card-text"> Bid : {{ item.bid_amount }}</p>
       <p class="card-text"> Bider Email : {{ item.bider_email}}</p>
       <!-- <div>{{item?.endDate?.seconds | timestampDateFormat | timeDiff }}</div> -->
-  
       <div>{{item?.endDate?.seconds | timestampDateFormat | timeDiff }}</div>
-
       <div>
         <form [formGroup]="bidForm" (ngSubmit)="clickEvent(item,bidForm)">
           <div>
