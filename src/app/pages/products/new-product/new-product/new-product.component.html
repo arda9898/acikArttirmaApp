@@ -1,0 +1,39 @@
+<h1> Create New Product</h1>
+
+<form [formGroup]="newProductForm" (ngSubmit)="clickEvent(newProductForm)">
+  <div>
+    <div class="input-container">
+      <input type="text" placeholder="Enter your product name" formControlName="productName">
+    </div>
+    <div class="input-container">
+      <input type="text" placeholder="Enter your product price" formControlName="price">
+    </div>
+    <div class="input-container">
+      <input type="text" placeholder="Enter your product end date" formControlName="endDate">
+    </div>
+    <div class="input-container">
+      <input type="text" placeholder="Enter your product's image URL" formControlName="imageURL">
+    </div>
+    <div class="input-container">
+    <input type="text" placeholder="Enter your product's bider email" formControlName="bider_email">
+    </div>
+    <div class="input-container">
+      <input type="text" placeholder="Enter your product's bid amount" formControlName="bid_amount">
+    </div>
+  </div>
+  <div>
+
+  </div>
+  <div class="row">
+    <a class="btn btn-primary" (click)="clickEvent(newProductForm)">Create Product</a>
+  </div>
+
+</form>
+<!-- 
+price: new FormControl('', { validators: Validators.required }),
+    productName: new FormControl('', { validators: Validators.required }),
+    endDate: new FormControl('', { validators: Validators.required }),
+    email: new FormControl('', { validators: Validators.required }),
+    bider_email: new FormControl('', { validators: Validators.required }),
+    bid_amount: new FormControl('', { validators: Validators.required }),
+    imageURL: new FormControl('', { validators: Validators.required }), -->

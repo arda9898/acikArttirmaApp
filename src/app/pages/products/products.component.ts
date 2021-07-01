@@ -43,10 +43,6 @@ export class ProductsComponent implements OnInit {
   // time 0 olursa işlem alma
   //nice to have: buy now masaya vuran alır
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
-
 }
 
 

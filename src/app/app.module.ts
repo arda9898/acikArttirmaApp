@@ -23,6 +23,7 @@ import { SignUpComponent } from './pages/user/sign-up/sign-up.component';
 import { HttpClientModule } from '@angular/common/http';
 //import { AuthService } from './pages/user/authService.service';
 import { TimestampDateFormatPipe } from 'src/libs';
+import { NewProductComponent } from './pages/products/new-product/new-product/new-product.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { TimestampDateFormatPipe } from 'src/libs';
     SignInComponent,
     SignUpComponent,
     TimestampDateFormatPipe,
-    TimeDiffPipe
+    TimeDiffPipe,
+    NewProductComponent
 
   ],
   imports: [

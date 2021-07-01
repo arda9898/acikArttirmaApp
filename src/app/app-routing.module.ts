@@ -9,6 +9,7 @@ import { CartComponent } from './pages/products/cart/cart.component';
 import { UserComponent } from './pages/user/user.component';
 import { SignInComponent } from  './pages/user/sign-in/sign-in.component';
 import { SignUpComponent } from  './pages/user/sign-up/sign-up.component';
+import { NewProductComponent } from './pages/products/new-product/new-product/new-product.component';
 
 const routes: Routes = [
   { path: '', component: UserComponent},
@@ -21,14 +22,20 @@ const routes: Routes = [
    },
    { path: 'products', component: ProductsComponent,
     children: [
-         { path: 'cart', component: CartComponent }     ]
+         { path: 'cart', component: CartComponent }
+        ]
    },
    { path: 'admin', component: AdminComponent,
     children: [
          { path: 'products', component: AdminProductsComponent },
          { path: 'users', component: AdminUsersComponent }
        ]
-   }
+   }, 
+   { path: 'addproduct', component: NewProductComponent, 
+     children: [
+        { path: '', component: NewProductComponent }
+  ]
+  },
   ];
 
 @NgModule({

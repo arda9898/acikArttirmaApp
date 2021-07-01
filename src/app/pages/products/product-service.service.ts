@@ -20,27 +20,23 @@ export class ProductServiceService {
 
 
   constructor(private db: AngularFirestore) { }
-  /*
-  price?: number;
-      productName?:String;
-      endDate?: Date;
-      //bids?: Array<Bid>;
-      bider_email:string;
-      bid_amount:number;
-  */
 
-  /* Get items list */
+  //Get items list 
+
   GetItemList() {
     this.productsRef = this.db.collection('items').valueChanges();
     console.log('prods:', this.productsRef);
     return this.productsRef;
   }
 
+  //gets all items from database 
   getAllDocs() {
     const ref = this.db.collection('items');
     console.log(ref);
     return ref.valueChanges({ idField: 'customIdName' });
   }
+
+  // 
   updateItem(product: Product, bidForm: FormGroup) {
     this.productRef = this.db.doc(`items/${product.customIdName}`);
     this.productRef.valueChanges().subscribe(prod => {
@@ -50,6 +46,13 @@ export class ProductServiceService {
 
     console.log("bid amount:", product.bid_amount);
     console.log("bid amount prev:", this.bid_amount_prev);
+    
+    const dateNow = new Date();
+    const now = dateNow.getTime() / 1000
+    console.log("dateno:",now)
+    console.log("end date:",product.endDate.seconds)
+
+    if(now as any < product.endDate.seconds) {
 
     if (bidForm.value.bid > this.bid_amount_prev) {
       console.log("bid:", bidForm.value.bid);
@@ -61,7 +64,24 @@ export class ProductServiceService {
     }
 
     this.bid_amount_prev = null;
+    }
+  }
 
+  createItem(newItem:FormGroup){
+    this.db.collection('items').add({
+      price: newItem.value.price,
+      productName: newItem.value.productName,
+      endDate: newItem.value.endDate,
+      bider_email: newItem.value.bider_email,
+      bid_amount: newItem.value.bid_amount,
+      imageURL:newItem.value.imageURL
+  })
+  .then((docRef) => {
+      console.log("Document written with ID: ", docRef.id);
+  })
+  .catch((error) => {
+      console.error("Error adding document: ", error);
+  });
   }
 
   //console.log("product:",product.customIdName)
